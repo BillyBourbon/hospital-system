@@ -1,0 +1,399 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #edf6f9; 
+  color: #333333;
+}
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: #edf6f9;
+}
+h1 {
+  text-decoration:underline;
+  font-weight: bold;
+}
+.title h1 {
+  justify-content:center;
+}
+.navBar, .footer {
+  flex-shrink: 0; /* Prevent shrinking */
+}
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 5px; /* Rounded corners */
+}
+::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  border-radius: 5px; /* Rounded corners */
+  transition: background 0.3s ease; /* Smooth transition */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Thumb color on hover */
+}
+.navBar {
+  background-color: #006d77; 
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between; /* Space out navbar items */
+  align-items: center; /* Center items vertically */
+}
+.navBar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+.navBar .navLinks {
+  display: flex;
+  gap: 20px; /* Spacing between links */
+}
+
+.navBar .navLinks a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navBar .navLinks a:hover {
+  color: #83c5be;
+}
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0px 20px;
+  background-color: white; 
+}
+.navBar .dropdown {
+  display : inherit;
+  justify-content : right;
+  padding : 10px;
+}
+
+.pageBar, .footer {
+  background-color: #006d77; 
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  border: solid thin #ddd; 
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 5px;
+  text-align: center;
+  justify-content : center;
+  align-items : center;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 25px; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05); 
+}
+
+.navBar .btn {
+  background-color: #83c5be; 
+  color: white;
+  border-radius: 10px;
+  width: 100px; 
+  height: 40px;
+}
+
+.navBar .dropdown {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 15px; /* Add spacing between buttons */
+  padding: 10px;
+}
+.pageBar .btn {
+  background-color: #ff4081; 
+  color: white;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  font-weight: 500;
+  padding: 0.5rem;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ff4081; 
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  background-color: #e91e63; 
+}
+
+.mainMenu {
+  background: #006d77; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  padding: 10px;
+}
+
+.mainMenu .btn {
+  width: 100%; 
+  border-radius: 25px;
+  background-color: #83c5be; 
+  color: white;
+  margin: 5px 0; 
+}
+
+.chainlistContainer {
+  width: 100%;
+  background: #83c5be; 
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px; 
+  margin: 10px 0;
+}
+.dataTable {
+  overflow: auto;
+  margin: auto;
+  width: 100%;
+  background: white;
+  color: #333333;
+  border: solid thin #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; 
+  max-height: calc(100vh - 150px); 
+}
+
+
+/* Default table layout for desktop */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, td, th {
+  padding: 1rem;
+  font-weight: 500;
+}
+
+th {
+  position: sticky;
+  top: 0px; /* Adjust this value to match the height of your navbar */
+  background: #006d77;
+  color: white;
+  border-top: thin solid #ddd;
+  border-bottom: thin solid #ddd;
+  z-index: 1; /* Ensure the header stays above the table rows */
+}
+
+tr:nth-of-type(2n) {
+  background: rgba(3, 218, 198, 0.1);
+}
+
+
+
+
+.form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .array-input {
+            margin-bottom: 5px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile-specific layout */
+@media (max-width: 768px) {
+  table thead {
+    display: none; /* Hide the header on mobile */
+  }
+
+  table tbody,
+  table tr,
+  table td {
+    display: block; /* Convert table to block layout for mobile */
+  }
+
+  table tr {
+    margin-bottom: 10px; /* Spacing between rows */
+    border: 1px solid #ddd; /* Optional: Add border for better separation */
+    border-radius: 10px; /* Optional: Rounded corners */
+    padding: 10px; /* Optional: Padding for better spacing */
+    cursor: pointer; /* Indicate that the row is clickable */
+    transition: background-color 0.3s ease; /* Smooth transition for hover/active states */
+  }
+
+  table tr:hover {
+    background-color: rgba(3, 218, 198, 0.1);
+  }
+
+  table td {
+    text-align: left; /* Align text to the left */
+    border: none; /* Remove borders */
+    display: flex; /* Use flexbox to align header name and value */
+    align-items: center; /* Vertically center content */
+    gap: 10px; /* Spacing between header name and value */
+  }
+  .chainListTable td:not(:nth-child(2)):not(:nth-child(6)):not(:nth-child(9)):not(:nth-child(10)):not(:nth-child(11)) {
+    display: none;
+  }
+
+  .directorListTable td:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(11)):not(:nth-child(12)):not(:nth-child(13)):not(:nth-child(14)) {
+    display: none;
+  }
+
+  /* Show all columns when the row is expanded */
+  table tr.expanded td {
+    display: flex !important; /* Force display for all columns */
+  }
+
+  /* Add header names as labels using pseudo-elements */
+  table td::before {
+    content: attr(data-label); /* Use data-label attribute for header name */
+    font-weight: bold; /* Make the label bold */
+    color: #006d77; /* Match the header color */
+    min-width: 120px; /* Ensure consistent width for labels */
+  }
+  
+  .navBar .btn {
+    width: 80px; 
+    height: 35px;
+    font-size: 14px;
+  }
+
+  .pageBar .btn {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+
+  .mainMenu .btn {
+    padding: 8px 16px; 
+  }
+
+  .dataTable {
+    max-width: 100%; 
+  }
+  .navBar {
+    padding: 10px;
+    position: relative; /* Ensure the navbar is positioned correctly */
+    border : solid thin black;
+  }
+
+  .navBar .dropdown {
+    display: none; /* Hide dropdown by default on mobile */
+    flex-direction: column; /* Stack buttons vertically */
+    background-color: rgba(	0, 109, 119,0.9);
+    position: absolute;
+    top: 45px; /* Position below the navbar */
+    left: 0;
+    width: 100%; /* Full width */
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    z-index: 1000; /* Ensure it appears above other content */
+    border-radius: 0 0 10px 10px; /* Rounded corners at the bottom */
+    border : thin solid black;
+  }
+
+  .navBar .dropdown.active {
+    display: flex; /* Show dropdown when active */
+  }
+
+  .navBar .dropdown .btn {
+    width: 100%; /* Full width buttons */
+    margin: 5px 0; /* Spacing between buttons */
+  }
+
+  .navBar .burgerMenu {
+    display: block; /* Show burger menu icon */
+    cursor: pointer;
+  }
+
+  .navBar .burgerMenu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .navBar .burgerMenu.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .navBar .burgerMenu.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navBar .burgerMenu.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .mainContainer {
+    height: auto; /* Allow the container to grow on mobile */
+    overflow-y: auto; /* Enable scrolling for the entire container on mobile */
+  }
+
+  .mainContent {
+    overflow-y: visible; /* Disable scrolling for the content on mobile */
+  }
+
+}
