@@ -58,6 +58,9 @@ h1 {
   justify-content: space-between; /* Space out navbar items */
   align-items: center; /* Center items vertically */
 }
+.burgerMenu {
+  display: none;
+}
 .navBar .logo {
   font-size: 24px;
   font-weight: bold;
@@ -181,16 +184,6 @@ h1 {
   color: white;
   margin: 5px 0; 
 }
-
-.chainlistContainer {
-  width: 100%;
-  background: #83c5be; 
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border-radius: 10px; 
-  margin: 10px 0;
-}
 .dataTable {
   overflow: auto;
   margin: auto;
@@ -204,8 +197,6 @@ h1 {
   max-height: calc(100vh - 150px); 
 }
 
-
-/* Default table layout for desktop */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -230,25 +221,22 @@ tr:nth-of-type(2n) {
   background: rgba(3, 218, 198, 0.1);
 }
 
-
-
-
 .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .array-input {
-            margin-bottom: 5px;
-        }
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.array-input {
+    margin-bottom: 5px;
+}
 
 
 
@@ -291,13 +279,6 @@ tr:nth-of-type(2n) {
     display: flex; /* Use flexbox to align header name and value */
     align-items: center; /* Vertically center content */
     gap: 10px; /* Spacing between header name and value */
-  }
-  .chainListTable td:not(:nth-child(2)):not(:nth-child(6)):not(:nth-child(9)):not(:nth-child(10)):not(:nth-child(11)) {
-    display: none;
-  }
-
-  .directorListTable td:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(11)):not(:nth-child(12)):not(:nth-child(13)):not(:nth-child(14)) {
-    display: none;
   }
 
   /* Show all columns when the row is expanded */
