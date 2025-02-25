@@ -7,6 +7,7 @@ async function connect() {
     password: process.env.NEXT_PUBLIC_DB_PASS,
     database: process.env.NEXT_PUBLIC_DB_SCHEMA,
   }  
+  console.log(connectionOptions)
   const connection = await mysql.createConnection(connectionOptions);
   return connection
 }
@@ -25,7 +26,7 @@ async function dbGet(query) {
 
   connection.destroy()
   
-  return output
+  return JSON.parse(JSON.stringify(output))
 }
 
 async function dbPost(query, values) {
@@ -43,7 +44,5 @@ async function dbPost(query, values) {
   return status
 }
 
-// dbPost("INSERT INTO sitemessages (MessageTimestamp, MessageName, MessageEmail, MessageMessage) VALUES ?", [new Date().getTime(), "Billy", "ballinson18", "some message here"])
-
-
+// export default dbGet
 export {dbGet, dbPost}

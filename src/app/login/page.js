@@ -1,19 +1,36 @@
 'use client'
+import { dbGet } from "../scripts/dbHelper"
+import { useRouter } from "next/router"
 const Login = () => {
-  const loginUser = (e) => {
+  const router = useRouter()  
+  const loginUser = async (e) => {
     e.preventDefault()
-    const userEmail = document.getElementById("userEmail").value
+    const accountType = "patient"
+    const scriptOutputBox = document.getElementById("scriptBox")
+    scriptOutputBox.innerHTML = ""
+    const email = document.getElementById("userEmail").value
     const password = document.getElementById("password").value
-    console.log(userEmail , password)
-    const isValid = verifyCredentials(userEmail, password)
-    if(isValid){
-      console.log("VALID CREDS")
-    } else console.error("BAD CREDS")
-  }
-  
-  const verifyCredentials = (userEmail, password) => {
-    if(userEmail === "Billy" && password === "Billy") return true
-    else return false
+    // console.log("Email: ", email)
+    // console.log("Password: ", password)
+    // console.log("Account Type: ", accountType)
+
+    if(email.length === 0 || password.length === 0) return scriptOutputBox.innerHTML = "Please Enter Your Email And Password"
+
+    const query = `SELECT * FROM ${accountType} WHERE email_address = "${email}"`
+    const { rows:userData } = await dbGet(query)
+
+    if(userData.length === 0) {
+      // console.error("No User With This Email")
+      return scriptOutputBox.innerHTML = "No Account Found"
+    }
+
+    const isValid = password === userData[0].password
+
+    // console.log(userData)
+    // console.log("Is Valid Password: ", isValid)
+    if(!isValid) return scriptOutputBox.innerHTML = "Invalid Password Please Try Again"
+
+    router.push('/dashboard')
   }
 
   return(
@@ -35,9 +52,7 @@ const Login = () => {
           <a href="#">Forgot Password?</a>
         </div>
         
-        <div className="errorMessage hidden">
-          <p>ERROR</p>
-        </div>
+        <div id="scriptBox" className="errorMessage hidden"></div>
 
         <button id="submitLoginDetails" className="btn" onClick={loginUser}>Login</button>
       </form>
