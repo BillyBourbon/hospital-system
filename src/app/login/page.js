@@ -1,64 +1,127 @@
-'use client'
-import { dbGet } from "../scripts/dbHelper"
-import { useRouter } from "next/router"
-const Login = () => {
-  const router = useRouter()  
-  const loginUser = async (e) => {
-    e.preventDefault()
-    const accountType = "patient"
-    const scriptOutputBox = document.getElementById("scriptBox")
-    scriptOutputBox.innerHTML = ""
-    const email = document.getElementById("userEmail").value
-    const password = document.getElementById("password").value
-    // console.log("Email: ", email)
-    // console.log("Password: ", password)
-    // console.log("Account Type: ", accountType)
+/* eslint-disable capitalized-comments */
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { login } from '../scripts/auth';
+import styles from './login.module.css';
 
-    if(email.length === 0 || password.length === 0) return scriptOutputBox.innerHTML = "Please Enter Your Email And Password"
+export default function LoginPage(searchParams) {
+  const router = useRouter();
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [accountType, setAccountType] = useState('patient');
 
-    const query = `SELECT * FROM ${accountType} WHERE email_address = "${email}"`
-    const { rows:userData } = await dbGet(query)
+  const loginUser = async (e, { searchParams }) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const newErrors = {};
 
-    if(userData.length === 0) {
-      // console.error("No User With This Email")
-      return scriptOutputBox.innerHTML = "No Account Found"
+    // const { accountType } = await searchParams;
+
+    const email = document.getElementById('userEmail').value;
+    const password = document.getElementById('password').value;
+
+    if (!email) newErrors.email = 'Email is required';
+    if (!password) newErrors.password = 'Password is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setIsLoading(false);
+      return;
     }
 
-    const isValid = password === userData[0].password
+    setErrors({});
 
-    // console.log(userData)
-    // console.log("Is Valid Password: ", isValid)
-    if(!isValid) return scriptOutputBox.innerHTML = "Invalid Password Please Try Again"
+    // Send login credentials to api
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, accountType }),
+      });
 
-    router.push('/dashboard')
-  }
+      const data = await response.json();
 
-  return(
-  <div className="login">
-    <h1>Welcome To Hospital System</h1>
-    <div className="loginUserInputsContainer">
-      <form>
-        <h1>Login</h1>
+      if (response.ok) {
+        await login(data.user);
+        router.push('/dashboard');
+        window.location.reload();
+      } else {
+        setErrors({ api: data.message || 'Login failed' });
+      }
+    } catch (error) {
+      console.error('Error: ', error);
+      setErrors({ api: 'Network error. Try again.' });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-        <div className="form-group">
-          <input type="text" id="userEmail" name="userEmail" placeholder="Email Address" required/>
-        </div>
-        
-        <div className="form-group">
-          <input type="password" id="password" name="password" placeholder="Password" required/>
-        </div>
-        
-        <div className="forgottenLloginDetails">
-          <a href="#">Forgot Password?</a>
-        </div>
-        
-        <div id="scriptBox" className="errorMessage hidden"></div>
+  return (
+    <div>
+      <div className={styles.container}>
+        <form className={styles.form}>
+          <h2 className={styles.heading}>Login</h2>
 
-        <button id="submitLoginDetails" className="btn" onClick={loginUser}>Login</button>
-      </form>
+          <div className={styles.inputGroup}>
+            <label htmlFor="userEmail">Email Address</label>
+            <input
+              type="text"
+              id="userEmail"
+              name="userEmail"
+              placeholder="Email Address"
+              required
+            />
+          </div>
+          {errors.email && <div className="error">{errors.email}</div>}
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>Gender</label>
+            <div className={styles.toggleGroup}>
+              <button
+                type="button"
+                className={`${styles.toggleButton} ${accountType === 'patient' ? styles.active : ''}`}
+                onClick={() => setAccountType('patient')}
+              >
+                Patient
+              </button>
+              <button
+                type="button"
+                className={`${styles.toggleButton} ${accountType === 'staff' ? styles.active : ''}`}
+                onClick={() => setAccountType('staff')}
+              >
+                Staff
+              </button>
+            </div>
+          </div>
+
+          {errors.password && <div className="error">{errors.password}</div>}
+
+          <div className={styles.subHeading}>
+            <a href="/forgotPassword">Forgot Password?</a>
+          </div>
+          {errors.api && <div className="error">{errors.api}</div>}
+
+          <button
+            className={styles.submitButton}
+            disabled={isLoading}
+            onClick={(e) => loginUser(e, searchParams)}
+          >
+            {isLoading ? 'Logging in...' : 'Login'}
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-  )
+  );
 }
-
-export default Login

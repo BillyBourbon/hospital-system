@@ -1,9 +1,11 @@
+import styles from './footer.module.css';
+
 const Footer = () => {
-  return(
-    <div className="footer">
+  return (
+    <div className={styles.footer}>
       <p>&copy; {new Date().getFullYear()}</p>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

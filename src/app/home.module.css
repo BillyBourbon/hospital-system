@@ -1,0 +1,81 @@
+.container {
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, var(--primary-light), var(--primary-dark));
+  color: var(--text-colour);
+  padding: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  animation: fadeIn 1s ease-out;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  max-width: 500px;
+  animation: fadeIn 1.2s ease-out;
+}
+
+.loginMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn,
+.btnOutline {
+  background-color: var(--button-bg);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.btnOutline {
+  background-color: var(--button-bg);
+  border: 2px solid white;
+}
+
+.btnOutline:hover {
+  background-color: var(--button-hover-bg);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .btn, .btnOutline {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}

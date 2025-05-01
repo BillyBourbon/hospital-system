@@ -1,0 +1,37 @@
+.tabSection {
+  margin-bottom: 1.5rem;
+  width: 100%; /* Ensure full width for the section */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.tabHeader {
+  width: 100%; /* Force the header to take full width */
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem;
+  background-color: #fafafa;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tabHeader:hover {
+  background-color: #f0f0f0;
+}
+
+.tabContent {
+  width: 100%; /* Ensure content also stretches */
+  padding: 1rem;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

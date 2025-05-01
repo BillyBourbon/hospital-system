@@ -1,0 +1,12 @@
+:root {
+  --primary-colour: #00796b; /* Teal */
+  --primary-dark: #004d40; /* Dark Teal */
+  --secondary-colour: #e0f2f1; /* Light Teal */
+  --text-colour: #004d40; /* Dark Text */
+  --header-bg: #ffffff; /* White Background For Header */
+  --button-bg: #00796b; /* Teal Gor Button Background */
+  --button-hover-bg: #004d40; /* Dark Teal For Button Hover */
+  --border-colour: #b2dfdb; /* Light Teal For Borders */
+  --link-colour: #00796b; /* Teal Link Color */
+  --link-hover-colour: #004d40; /* Dark Teal Link Hover */
+}

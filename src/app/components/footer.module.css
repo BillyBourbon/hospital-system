@@ -1,0 +1,10 @@
+.footer {
+  background-color: var(--primary-dark); 
+  color: var(--text-colour);
+  padding: 10px 20px;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  border: solid thin var(--border-colour); 
+}
